@@ -20,7 +20,6 @@ const App = () => {
 			window.history.scrollRestoration = 'manual'
 		}
 
-		// skloni hash iz URL-a da browser ne skače na sekciju posle refresh-a
 		if (window.location.hash) {
 			window.history.replaceState(
 				null,
@@ -29,10 +28,8 @@ const App = () => {
 			)
 		}
 
-		// vrati na vrh odmah
 		window.scrollTo(0, 0)
 
-		// i još jednom posle mount-a/layout-a, za svaki slučaj
 		requestAnimationFrame(() => {
 			window.scrollTo(0, 0)
 		})

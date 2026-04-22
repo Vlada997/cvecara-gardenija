@@ -86,6 +86,7 @@ const About = () => {
 									ref={underlineRef}
 									src={underline}
 									alt=''
+									loading='eager'
 									aria-hidden='true'
 									className='block w-full will-change-transform'
 									style={{ transform: 'scaleX(0)' }}

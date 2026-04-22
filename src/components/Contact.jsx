@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import phone from '../assets/icons/phone.png'
 import mail from '../assets/icons/mail.png'
 import location from '../assets/icons/location.png'
@@ -6,6 +6,29 @@ import instagram from '../assets/icons/instagram.png'
 import { IoSend } from 'react-icons/io5'
 
 const Contact = () => {
+	const [status, setStatus] = useState('')
+
+	const handleSubmit = async (e) => {
+		e.preventDefault()
+		setStatus('sending')
+
+		const formData = new FormData(e.target)
+
+		const response = await fetch('https://api.web3forms.com/submit', {
+			method: 'POST',
+			body: formData,
+		})
+
+		const data = await response.json()
+
+		if (data.success) {
+			setStatus('success')
+			e.target.reset()
+		} else {
+			setStatus('error')
+		}
+	}
+
 	return (
 		<section
 			id='kontakt'
@@ -35,15 +58,15 @@ const Contact = () => {
 				<div className='w-full lg:w-[72%] xl:w-[55%] mt-[60px] lg:mt-[72px] xl:mt-[60px] flex flex-col gap-12 lg:gap-14 xl:gap-12'>
 					{/* FORM */}
 					<form
+						onSubmit={handleSubmit}
 						data-animate='fade-up'
 						aria-label='Kontakt forma'
-						className='w-full flex flex-col gap-7 lg:gap-8 xl:gap-10'
-						action='https://api.web3forms.com/submit'
-						method='POST'>
+						className='w-full flex flex-col gap-7 lg:gap-8 xl:gap-10'>
+						{/* Web3Forms hidden fields */}
 						<input
 							type='hidden'
 							name='access_key'
-							value='YOUR_ACCESS_KEY_HERE'
+							value='085622ae-7bc9-4b2d-935a-98d0064f769c'
 						/>
 						<input
 							type='hidden'
@@ -113,9 +136,10 @@ const Contact = () => {
 						</div>
 
 						{/* SUBMIT */}
-						<div className='-mt-2.5 flex justify-center'>
+						<div className='-mt-2.5 flex flex-col items-center'>
 							<button
 								type='submit'
+								disabled={status === 'sending'}
 								className='
 									flex items-center gap-2
 									cursor-pointer
@@ -133,9 +157,22 @@ const Contact = () => {
 									origin-center
 									transition-all duration-200
 									will-change-transform'>
-								Pošalji
+								{status === 'sending' ? 'Šalje se...' : 'Pošalji'}
 								<IoSend />
 							</button>
+
+							{/* STATUS */}
+							{status === 'success' && (
+								<p className='text-green-600 mt-4 font-main'>
+									Poruka je uspešno poslata ✅
+								</p>
+							)}
+
+							{status === 'error' && (
+								<p className='text-red-600 mt-4 font-main'>
+									Došlo je do greške. Pokušajte ponovo.
+								</p>
+							)}
 						</div>
 					</form>
 
@@ -199,16 +236,7 @@ const ContactItem = ({
 			hover:bg-dark hover:text-white
 			transition-all duration-300 ease-[cubic-bezier(0.2,1,0.1,1)]
 		'>
-		<span
-			className='
-				shrink-0
-				bg-[#eeeeee]
-				p-3 lg:p-4 xl:p-5
-				rounded-full
-				flex items-center justify-center
-				group-hover:bg-white
-				transition-all duration-300 ease-[cubic-bezier(0.2,1,0.1,1)]
-			'>
+		<span className='shrink-0 bg-[#eeeeee] p-3 lg:p-4 xl:p-5 rounded-full flex items-center justify-center group-hover:bg-white transition-all duration-300'>
 			<img
 				src={icon}
 				draggable='false'
