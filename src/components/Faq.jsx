@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import faqBG from '../assets/images/faq-bg2.jpg'
 
 const faqs = [
 	{
@@ -90,16 +89,6 @@ const FAQ = () => {
 			id='faq'
 			aria-labelledby='faq-title'
 			className='relative rounded-border-bottom text-dark scroll-mt-[80px] lg:scroll-mt-[96px] xl:scroll-mt-[120px]'>
-			<div
-				aria-hidden='true'
-				className='absolute inset-0 opacity-50 pointer-events-none'
-				style={{
-					backgroundImage: `url(${faqBG})`,
-					backgroundRepeat: 'repeat',
-					backgroundPosition: 'center',
-				}}
-			/>
-
 			<div className='wrapper relative bg-[#f1f1f1] flex-center flex-col custom-radius-bottom section-spacing-y'>
 				<h2
 					id='faq-title'

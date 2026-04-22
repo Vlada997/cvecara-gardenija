@@ -4,7 +4,7 @@ import Hero from './components/Hero'
 import Catalog from './components/Catalog'
 import About from './components/About'
 import SlidingText from './components/SlidingText'
-import FAQ from './components/FAQ'
+import Faq from './components/Faq'
 import Gallery from './components/Gallery'
 import Contact from './components/Contact'
 import Footer from './components/Footer'
@@ -49,7 +49,7 @@ const App = () => {
 			/>
 			<About />
 			<Gallery />
-			<FAQ />
+			<Faq />
 			<Contact />
 			<Footer />
 		</div>
